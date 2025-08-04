@@ -1,0 +1,1 @@
+// KYC.js - dummy content

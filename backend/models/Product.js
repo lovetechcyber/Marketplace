@@ -1,0 +1,1 @@
+// Product.js - dummy content
