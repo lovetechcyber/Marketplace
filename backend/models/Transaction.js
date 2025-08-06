@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
-
 const transactionSchema = new mongoose.Schema({
-  buyerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  sellerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
-  amount: { type: Number, required: true },
-  paymentRef: { type: String, required: true }, // Flutterwave/Paystack reference
-  status: { type: String, enum: ['pending', 'delivered', 'released', 'disputed'], default: 'pending' },
+  buyerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  sellerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+  amount: Number,
+  status: { type: String, enum: ['pending', 'paid', 'delivered', 'disputed', 'released'], default: 'pending' },
+  deliveryConfirmed: { type: Boolean, default: false },
+  escrowReleased: { type: Boolean, default: false },
+  disputed: { type: Boolean, default: false },
+  adminNote: { type: String, default: '' },
+  evidence: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now }
 });
-
-module.exports = mongoose.model('Transaction', transactionSchema);

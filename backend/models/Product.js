@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema({
   videoReel: String, // Cloudinary video URL
   sellerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   status: { type: String, enum: ['available', 'sold'], default: 'available' },
+  moderationStatus: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
   createdAt: { type: Date, default: Date.now }
 });
 

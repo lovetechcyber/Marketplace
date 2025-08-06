@@ -27,3 +27,16 @@ exports.goLive = async (req, res) => {
 
   res.json({ token, channelName, uid });
 };
+exports.stopLive = async (req, res) => {
+  await User.findByIdAndUpdate(req.user.id, {
+    isLive: false,
+    agoraChannelName: '',
+    liveProductId: null
+  });
+  res.json({ message: 'Live stream ended' });
+};
+exports.getLiveStatus = async (req, res) => {
+  const user = await User.findById(req.user.id).select('isLive agoraChannelName liveProductId');
+  if (!user) return res.status(404).json({ error: 'User not found' });
+  res.json(user);
+};

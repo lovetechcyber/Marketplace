@@ -7,6 +7,13 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
+const { uploader } = require('../services/cloudinaryService');
+
+const file = req.file;
+const uploaded = await uploader.upload_stream_to_cloudinary(file.buffer, 'evidence');
+tx.evidence = uploaded.secure_url;
+
+
 exports.uploader = {
   upload_stream_to_cloudinary: (buffer, folder) => {
     return new Promise((resolve, reject) => {
