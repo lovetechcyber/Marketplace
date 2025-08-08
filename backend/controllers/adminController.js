@@ -129,3 +129,5 @@ exports.banUser = async (req, res) => {
   });
   res.json({ message: 'User banned' });
 };
+
+

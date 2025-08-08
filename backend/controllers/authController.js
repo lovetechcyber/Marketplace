@@ -20,3 +20,14 @@ res.cookie('refreshToken', refreshToken, {
 });
 
 res.json({ accessToken });
+
+const sendEmail = require('../utils/sendEmail');
+
+// in your controller
+await sendEmail(
+  user.email,
+  'Reset Your Password',
+  `<p>You requested a password reset.</p>
+   <p><a href=\"${resetUrl}\">Click here to reset your password</a></p>`
+);
+

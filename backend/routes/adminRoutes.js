@@ -33,13 +33,6 @@ router.get('/user/:id', verifyAdmin, getUserById);
 router.put('/user/:id', verifyAdmin, updateUser);
 router.delete('/user/:id', verifyAdmin, deleteUser);
 router.get('/user/:id/wallet-balance', verifyAdmin, getUserWalletBalance);
-GET /api/admin/withdrawals
-PATCH /api/admin/withdrawal/:id/mark-paid
-PATCH /api/admin/withdrawal/:id/mark-failed
-PATCH /api/admin/user/:id/ban
-PATCH /api/admin/user/:id/unban
-
-
-
+router.patch('/user/:id/ban', verifyAdmin, banUser);
 
 module.exports = router;

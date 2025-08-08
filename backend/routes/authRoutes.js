@@ -10,3 +10,22 @@ export async function refreshToken(req, res) {
     res.sendStatus(403);
   }
 }
+// Sends email with token
+const crypto = require('crypto');
+const User = require('../models/User');
+const sendEmail = require('../utils/sendEmail');
+
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) return res.status(404).json({ message: 'User not found' });
+
+  const token = crypto.randomBytes(32).toString('hex');
+  user.resetToken = token;
+  user.resetTokenExpiry = Date.now() + 3600000; // 1 hr
+  await user.save();
+
+  const resetUrl = `https://yourdomain.com/reset-password?token=${token}`;
+  await sendEmail(email, 'Password Reset', `Reset using: ${resetUrl}`);
+  res.json({ message: 'Reset email sent' });
+};

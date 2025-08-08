@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema(
     email: { type: String, unique: true },
     phone: String,
     password: String,
+    resetToken: String,
+    resetTokenExpiry: Date,
     isVerified: { type: Boolean, default: false },
     kyc: {
       idType: String,
