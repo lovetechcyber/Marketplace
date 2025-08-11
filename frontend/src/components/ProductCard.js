@@ -1,1 +1,0 @@
-// ProductCard.js - dummy content
